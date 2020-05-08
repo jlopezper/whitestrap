@@ -5,9 +5,13 @@
 
 [![R build
 status](https://github.com/jlopezper/whitestrap/workflows/R-CMD-check/badge.svg)](https://github.com/jlopezper/whitestrap/actions)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of whitestrap is to …
+This package presents the White’s Test of Heterocedasticity and a
+bootstrapped version of it, developed under the methodology of Jeong,
+J., Lee, K. (1999) (see references for further details).
 
 ## Installation
 
@@ -69,15 +73,6 @@ names(white_test_boot(fit))
 #> [1] "w_stat"  "p_value" "iters"
 ```
 
-You can also see the distribution of the boostrapped test statistics:
-
-``` r
-wtest <- white_test_boot(fit)
-plot(wtest)
-```
-
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
-
 ## Comparison between the original and the bootstrap version
 
 One way to compare the results of both tests is through simulations. The
@@ -86,13 +81,13 @@ p-value of both tests is computed. The data used for this purpose were
 artificially generated to be heterocedastic, so low p-values are
 desirable.
 
-![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 If we look at the cumulative distribution functions of both p-value
 distributions, we see that in small samples the bootstrapped test
 returns smaller p-values with higher probability.
 
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
 
 In order to check for differences between the two distributions, a
 two-sample Kolmogorov–Smirnov test is run. In this case, we’ll test
@@ -102,4 +97,17 @@ will be run for both alternative sides (*CDF (BW) \> CDF (W)* and *CDF
 outperforms *CDF (W)* for samples \< 50. No differences are appreciated
 with samples greater than or equal to 50.
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+
+## References
+
+  - Jeong, J., & Lee, K. (1999). Bootstrapped White’s test for
+    heteroskedasticity in regression models. Economics Letters, 63(3),
+    261-267.
+
+  - White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix
+    Estimator and a Direct Test for Heteroskedasticity. Econometrica,
+    48(4), 817-838. <doi:10.2307/1912934>
+
+  - Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a
+    modern approach. Mason, Ohio, South-Western Cengage Learning.

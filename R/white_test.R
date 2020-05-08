@@ -160,7 +160,7 @@ white_test_boot <-
     output <-
       structure(
         list(
-          w_stat = wsb,
+          w_stat = round(wt$w_stat, 2),
           p_value = bcount/1000,
           iters = bootstraps
         ),
@@ -174,7 +174,7 @@ white_test_boot <-
 
 #' @export
 print.white_test <- function(x, ...) {
-  if(length(x$w_stat) == 1) {
+  if(length(x) == 2) {
     cat("White's test results\n",
         paste0("Null hypothesis: Homoskedasticity of the residuals"),
         paste0("Alternative hypothesis: Heteroskedasticity of the residuals"),
@@ -182,9 +182,9 @@ print.white_test <- function(x, ...) {
         paste0("P-value: ", round(x$p_value, 6)),
         sep = "\n")
   } else {
-    x$w_stat <- ifelse(length(x$w_stat) <= 10,
-                       paste0(round(x$w_stat, 2), collapse = ", "),
-                       paste0(paste0(round(x$w_stat[1:10], 2), collapse = ", "), ",..."))
+    # x$w_stat <- ifelse(length(x$w_stat) <= 10,
+    #                    paste0(round(x$w_stat, 2), collapse = ", "),
+    #                    paste0(paste0(round(x$w_stat[1:10], 2), collapse = ", "), ",..."))
 
     cat("Bootstrapped White's test results\n",
         paste0("Null hypothesis: Homoskedasticity of the residuals"),
@@ -197,17 +197,3 @@ print.white_test <- function(x, ...) {
 
 }
 
-#' @export
-plot.white_test <-
-  function(x, ...) {
-    hist(x$w_stat,
-         breaks = "FD",
-         col = "peachpuff",
-         border = "black",
-         prob = TRUE,
-         xlab = "Test Statistic",
-         main = paste0("Bootstrapped White's test (bootstrap samples = ", x$iters, ")"))
-    lines(density(x$w_stat),
-          lwd = 2,
-          col = "chocolate3")
-  }
