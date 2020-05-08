@@ -7,6 +7,8 @@
 status](https://github.com/jlopezper/whitestrap/workflows/R-CMD-check/badge.svg)](https://github.com/jlopezper/whitestrap/actions)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/jlopezper/whitestrap/branch/master/graph/badge.svg)](https://codecov.io/gh/jlopezper/whitestrap?branch=master)
 <!-- badges: end -->
 
 This package presents the White’s Test of Heterocedasticity and a
