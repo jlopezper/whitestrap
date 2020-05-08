@@ -1,0 +1,190 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  # out.width = "100%"
+  fig.width = 8, 
+  fig.height = 5.5
+)
+```
+
+# whitestrap
+
+<!-- badges: start -->
+[![R build status](https://github.com/jlopezper/whitestrap/workflows/R-CMD-check/badge.svg)](https://github.com/jlopezper/whitestrap/actions)
+<!-- badges: end -->
+
+The goal of whitestrap is to ...
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("jlopezper/whitestrap")
+```
+## Example
+
+This is an example which shows you how you can use the `white_test` and `white_test_boot` functions:
+
+```{r}
+library(whitestrap)
+
+set.seed(123)
+# Let's simulate some heteroscedastic data
+n <- 100
+y <- 1:n
+sd <- runif(n, min = 0, max = 4)
+error <- rnorm(n, 0, sd*y)
+X <- y + error
+df <- data.frame(y, X)
+# OLS model
+fit <- lm(y ~ X, data = df)
+```
+
+```{r}
+# White's test and Bootstrapped White's test
+white_test(fit)
+white_test_boot(fit)
+```
+
+In either case, the returned object is a list with the value of the statistical test and the p-value of the test. For the bootstrapped version, the number of bootstrap samples is also provided.
+
+```{r}
+names(white_test(fit))
+names(white_test_boot(fit))
+```
+
+You can also see the distribution of the boostrapped test statistics:
+
+```{r}
+wtest <- white_test_boot(fit)
+plot(wtest)
+```
+
+
+## Comparison between the original and the bootstrap version
+
+One way to compare the results of both tests is through simulations. The following plot shows the distribution of 500 simulations where the p-value of both tests is computed. The data used for this purpose were artificially generated to be heterocedastic, so low p-values are desirable.
+
+```{r echo=FALSE}
+load("./R/sysdata.rda")
+
+library(ggplot2)
+simulation_data <- tidyr::gather(simulation_data, -sample_size, key='ptypes', value='values')
+simulation_data <- dplyr::mutate(simulation_data, sample_size = paste0('sample size: ', sample_size))
+simulation_data$sample_size <- factor(simulation_data$sample_size, 
+                                      levels = c("sample size: 20",
+                                                 "sample size: 30",
+                                                 "sample size: 40",
+                                                 "sample size: 50",
+                                                 "sample size: 60",
+                                                 "sample size: 80",
+                                                 "sample size: 100",
+                                                 "sample size: 200",
+                                                 "sample size: 300"))
+
+ggplot(simulation_data, aes(x=values, fill=ptypes)) +
+  geom_density(alpha=0.4, color=NA) +
+  theme_minimal() +
+  facet_wrap(sample_size~., scales="free") +
+  scale_fill_brewer(palette="Set2", labels = c('P-value', 'Bootstrapped p-value')) +
+  labs(x = 'P-values',
+       title = "P-values from White's test and Bootstrapped White's test",
+       subtitle = "500 simulations with data suffering from heteroscedasticity",
+       fill = "") +
+  theme(strip.text.x = element_text(size = 11),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=13),
+        legend.text = element_text(size=11),
+        axis.text  = element_text(size=11),
+        axis.title  = element_text(size=11),
+        legend.position = 'bottom',
+        panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"))
+```
+
+If we look at the cumulative distribution functions of both p-value distributions, we see that in small samples the bootstrapped test returns smaller p-values with higher probability.
+
+```{r echo=FALSE}
+# create ECDF of data
+ggplot(simulation_data, aes(x = values, group = ptypes, color = ptypes))+
+  stat_ecdf(size=.5) +
+  facet_wrap(sample_size~.,scales="free") +
+  scale_color_brewer(palette="Set2", labels = c('P-value', 'Bootstrapped p-value'))  +
+  theme_minimal() +
+  theme(legend.position ="bottom") +
+  xlab("P-Value") +
+  ylab("CDF")  +
+  labs(title = "CDF of p-values from White's test and Bootstrapped White's test",
+       subtitle = "500 simulations with data suffering from heteroscedasticity",
+       color = "") +
+  theme(strip.text.x = element_text(size = 11),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=13),
+        legend.text = element_text(size=11),
+        axis.text  = element_text(size=11),
+        axis.title  = element_text(size=11),
+        legend.position = 'bottom',
+        panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+```
+
+In order to check for differences between the two distributions, a two-sample Kolmogorov–Smirnov test is run. In this case, we'll test whether one distribution stochastically dominates another, so the test will be run for both alternative sides (*CDF (BW) > CDF (W)* and *CDF (BW) < CDF (W)*). We see from the results that *CDF (BW)* statistically outperforms *CDF (W)* for samples < 50. No differences are appreciated with samples greater than or equal to 50.
+
+```{r echo=FALSE, warning=FALSE}
+load("./R/sysdata.rda")
+
+ks_less <- sapply(unique(simulation_data$sample_size), function (x) {
+  ttt <-  dplyr::filter(simulation_data, sample_size == x)
+  ks.test(ttt$pvalues_boot, ttt$pvalues, alternative = 'less', exact = TRUE)$p.value
+})
+
+ks_greater <- sapply(unique(simulation_data$sample_size), function (x) {
+    ttt <-  dplyr::filter(simulation_data, sample_size == x)
+    ks.test(ttt$pvalues_boot, ttt$pvalues, alternative = 'greater', exact = TRUE)$p.value
+  })
+
+
+ddd <- data.frame(
+  sample_size = unique(simulation_data$sample_size),
+  p_values_less = ks_less,
+  p_values_greater = ks_greater
+)
+
+ddd <- tidyr::gather(ddd, -sample_size, key='ptypes', value='values')
+ggplot(ddd, aes(x=as.factor(sample_size), y=values, group = ptypes)) +
+  geom_line(aes(color = ptypes)) +
+  geom_point(aes(color = ptypes)) +
+  scale_color_brewer(palette="Set2", labels = c('CDF (BW) > CDF (W)', 'CDF (BW) < CDF (W)'))  +
+  theme_minimal() +
+  labs(x = 'Sample size',
+       y = 'P-value',
+       color = "Alternative hypothesis",
+       title = 'Two-sample Kolmogorov–Smirnov test',
+       caption = "W: White's test; BW: Bootstrapped White's test") +
+  theme(strip.text.x = element_text(size = 11),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=13),
+        legend.title = element_text(size=11.5),
+        legend.text = element_text(size=11),
+        axis.text  = element_text(size=11),
+        axis.title  = element_text(size=11),
+        legend.position = 'bottom',
+        panel.border = element_blank(),
+        # panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"))
+```
+

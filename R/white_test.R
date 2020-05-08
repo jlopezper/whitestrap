@@ -1,3 +1,58 @@
+#' This function performs a White's Test for heteroskedasticity (White, H. (1980))
+#'
+#' White's test is a statistical test that determines whether the variance of the residuals in a regression model is constant.
+#'
+#' The approach followed is the one detailed at Wooldridge, 2012, p. 275. The fitted values from the original model are:
+#'
+#' \deqn{\widehat{y_i} = \widehat{\beta_0} + \widehat{\beta_1}x_{i1} + ... + \widehat{\beta_k}x_{ik}}
+#'
+#' Heteroscedasticity could be tested as a linear regression of the squared residuals against the fitted values:
+#'
+#' \deqn{\widehat{u^2} = \delta_0 + \delta_1\widehat{y} + \delta_2\widehat{y^2} + error}
+#'
+#' The null hypothesis states that \eqn{\delta_1 = \delta_2 = 0} (homoskedasticity). The test statistic
+#' is defined as:
+#'
+#' \deqn{LM = nR^2}
+#'
+#' where \eqn{R^2} is the R-squared value from the regression of \eqn{u^2}.
+#'
+#' @param model An object of class \code{\link[stats]{lm}}
+#'
+#' @return AA list with class \code{white_test} containing:\tabular{ll}{
+#'    \code{w_stat} \tab The value of the test statistic \cr
+#'    \tab \cr
+#'    \code{p_value} \tab The p-value of the test \cr
+#'    \tab \cr
+#' }
+#' @export
+#'
+#'
+#' @references
+#' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. doi:10.2307/1912934
+#'
+#' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
+#' South-Western Cengage Learning,
+#'
+#' @seealso \code{\link[stats]{lm}}
+#'
+#' @examples
+#' \dontrun{
+#' # Define a dataframe with heteroscedasticity
+#' n <- 1000
+#' y <- 1:n
+#' sd <- runif(n, min = 0, max = 4)
+#' error <- rnorm(n, 0, sd*y)
+#' X <- y + error
+#' df <- data.frame(y, X)
+#' # OLS model
+#' fit <- lm(y ~ X, data = df)
+#' # White's test
+#' white_test(fit)
+#' }
+#' @importFrom graphics hist lines
+#' @import stats
 white_test <- function(model) {
 
   # Squared residuals of fitted model
@@ -25,11 +80,53 @@ white_test <- function(model) {
 
 
 
+#' Bootstrapped version of the White's test (Jeong, J., Lee, K. (1999))
+#'
+#' This is a versioned White's test based on a bootstrap procedure that can improve the performance of White’s test,
+#' specially in small samples. It was proposed by Jeong, J., Lee, K. (1999) (see references for further details).
+#'
+#' @param model An object of class \code{\link[stats]{lm}}
+#' @param bootstraps Number of bootstrap to be performed. If `bootstraps` is less than 10, it will automatically be set to 10.
+#' At least 500 simulations are recommended. Default value is set to 1000.
+#'
+#' @return AA list with class \code{white_test} containing:\tabular{ll}{
+#'    \code{w_stat} \tab The value of the test statistic \cr
+#'    \tab \cr
+#'    \code{p_value} \tab The p-value of the test \cr
+#'    \tab \cr
+#'    \code{iters} \tab The number of bootstrap samples \cr
+#'    \tab \cr
+#' }
+#' @export
+#'
+#' @references
+#' Jeong, J., & Lee, K. (1999). Bootstrapped White’s test for heteroskedasticity in regression models. Economics Letters, 63(3), 261-267.
+#'
+#' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. doi:10.2307/1912934
+#'
+#' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
+#' South-Western Cengage Learning,
+#'
+#' @examples
+#' \dontrun{
+#' # Define a dataframe with heteroscedasticity
+#' n <- 1000
+#' y <- 1:n
+#' sd <- runif(n, min = 0, max = 4)
+#' error <- rnorm(n, 0, sd*y)
+#' X <- y + error
+#' df <- data.frame(y, X)
+#' # OLS model
+#' fit <- lm(y ~ X, data = df)
+#' # White's test
+#' white_test_boot(fit)
+#' }
 white_test_boot <-
   function(model, bootstraps = 1000) {
     if (bootstraps < 10) {
       bootstraps <- 10
-      warning("At least 10 bootstrap samples is recommended. Setting 'bootstrap_samples' to 10 even though at least 500 is recommended.")
+      warning("At least 10 bootstrap samples is recommended. Setting 'bootstrap_samples' to 10. At least 500 is recommended.")
     }
 
     # White test with original data
@@ -75,7 +172,7 @@ white_test_boot <-
   }
 
 
-
+#' @export
 print.white_test <- function(x, ...) {
   if(length(x$w_stat) == 1) {
     cat("White's test results\n",
@@ -100,6 +197,7 @@ print.white_test <- function(x, ...) {
 
 }
 
+#' @export
 plot.white_test <-
   function(x, ...) {
     hist(x$w_stat,
@@ -113,6 +211,3 @@ plot.white_test <-
           lwd = 2,
           col = "chocolate3")
   }
-
-
-
