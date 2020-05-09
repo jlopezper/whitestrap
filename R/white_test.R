@@ -196,3 +196,4 @@ print.white_test <- function(x, ...) {
   }
 
 }
+
