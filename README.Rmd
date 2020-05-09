@@ -56,7 +56,7 @@ white_test(fit)
 white_test_boot(fit)
 ```
 
-In either case, the returned object is a list with the value of the statistical test and the p-value of the test. For the bootstrapped version, the number of bootstrap samples is also provided.
+In either case, the returned object is a list with the value of the statistical test and the p-value of the test. For the bootstrapped version, the number of bootstrap samples is also provided. 
 
 ```{r}
 names(white_test(fit))

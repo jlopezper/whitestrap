@@ -60,7 +60,7 @@ white_test_boot(fit)
 #> Null hypothesis: Homoskedasticity of the residuals
 #> Alternative hypothesis: Heteroskedasticity of the residuals
 #> Number of bootstrap samples: 1000
-#> Boostrapped Test Statistic: 0.86, 0.04, 0.94, 5.73, 0.5, 2.53, 0.77, 1.93, 0.25, 0.6,...
+#> Boostrapped Test Statistic: 12.88
 #> P-value: 0.009
 ```
 
