@@ -143,7 +143,8 @@ white_test_boot <-
       var_res <- summary(model)$sigma^2
       bootstrapped_error <- var_res * rnorm(n = length(.fitted), mean = 0, sd = 1)
 
-      new_y <- model$model[[1]] + bootstrapped_error
+      # new_y <- model$model[[1]] + bootstrapped_error
+      new_y <- .fitted + bootstrapped_error
       aux_m <- lm(as.formula(gsub(".*~","new_y ~", format(model$call$formula))), data = model$model)
       aux_r_suared <- summary(lm(aux_m$residuals^2 ~ fitted(aux_m) + I(fitted(aux_m)^2)))$r.squared
       white_stat_b <- length(new_y) * aux_r_suared
