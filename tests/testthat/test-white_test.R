@@ -43,6 +43,6 @@ test_that("Bootstrapped White's test works", {
   several_checks(result = res, model = 'bootstrap')
 
   expect_warning(white_test_boot(fit, 5),
-                 "At least 10 bootstrap samples is recommended. Setting 'bootstrap_samples' to 10. At least 500 is recommended.")
+                 "At least 10 bootstrap samples are needed. Setting 'bootstrap_samples' to 10. At least 500 is recommended.")
   expect_equal(white_test_boot(fit, 5)$iters, 10)
 })
