@@ -126,7 +126,7 @@ white_test_boot <-
   function(model, bootstraps = 1000) {
     if (bootstraps < 10) {
       bootstraps <- 10
-      warning("At least 10 bootstrap samples is recommended. Setting 'bootstrap_samples' to 10. At least 500 is recommended.")
+      warning("At least 10 bootstrap samples are needed. Setting 'bootstrap_samples' to 10. At least 500 is recommended.")
     }
 
     # White test with original data
