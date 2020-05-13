@@ -25,7 +25,7 @@ This package presents the White's Test of Heterocedasticity and a bootstrapped v
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with: 
 
 ``` r
 # install.packages("devtools")
@@ -65,7 +65,7 @@ names(white_test_boot(fit))
 
 ## Comparison between the original and the bootstrap version
 
-One way to compare the results of both tests is through simulations. The following plot shows the distribution of 500 simulations where the p-value of both tests is computed. The data used for this purpose were artificially generated to be heterocedastic, so low p-values are desirable.
+One way to compare the results of both tests is through simulations. The following plot shows the distribution of 500 simulations where the p-value of both tests is computed. The data used for this purpose were artificially generated to be heterocedastic, so low p-values are desirable. 
 
 ```{r echo=FALSE}
 load("./R/sysdata.rda")
@@ -135,7 +135,7 @@ ggplot(simulation_data, aes(x = values, group = ptypes, color = ptypes))+
 
 ```
 
-In order to check for differences between the two distributions, a two-sample Kolmogorov–Smirnov test is run. In this case, we'll test whether one distribution stochastically dominates another, so the test will be run for both alternative sides (*CDF (BW) > CDF (W)* and *CDF (BW) < CDF (W)*). We see from the results that *CDF (BW)* statistically outperforms *CDF (W)* for samples < 50. No differences are appreciated with samples greater than or equal to 50.
+In order to check for differences between the two distributions, a two-sample Kolmogorov–Smirnov test is run. In this case, we'll test whether one distribution stochastically dominates another, so the test will be run for both alternative sides (*CDF (BW) > CDF (W)* and *CDF (BW) < CDF (W)*). We see from the results that *CDF (BW)* statistically outperforms *CDF (W)* for samples < 60. No differences are appreciated with samples greater than or equal to 60.
 
 ```{r echo=FALSE, warning=FALSE}
 load("./R/sysdata.rda")

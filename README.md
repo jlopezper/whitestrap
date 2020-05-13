@@ -96,8 +96,8 @@ two-sample Kolmogorov–Smirnov test is run. In this case, we’ll test
 whether one distribution stochastically dominates another, so the test
 will be run for both alternative sides (*CDF (BW) \> CDF (W)* and *CDF
 (BW) \< CDF (W)*). We see from the results that *CDF (BW)* statistically
-outperforms *CDF (W)* for samples \< 50. No differences are appreciated
-with samples greater than or equal to 50.
+outperforms *CDF (W)* for samples \< 60. No differences are appreciated
+with samples greater than or equal to 60.
 
 ![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 

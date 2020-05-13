@@ -141,7 +141,13 @@ white_test_boot <-
     for (i in seq_len(bootstraps)) {
       .fitted <- fitted(model)
       var_res <- summary(model)$sigma^2
-      bootstrapped_error <- var_res * rnorm(n = length(.fitted), mean = 0, sd = 1)
+
+      boot_error <- sample(c(-(sqrt(5)-1)/2, (sqrt(5)+1)/2),
+                          size = length(.fitted),
+                          prob = c((sqrt(5)+1)/2*sqrt(5), (sqrt(5)-1)/2*sqrt(5)),
+                          replace = TRUE)
+      # wild_boot <- sample(c(-1, 1), size = length(.fitted), prob = c(.5, .5), replace = TRUE)
+      bootstrapped_error <- var_res * boot_error
 
       # new_y <- model$model[[1]] + bootstrapped_error
       new_y <- .fitted + bootstrapped_error
