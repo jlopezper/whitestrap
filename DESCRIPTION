@@ -3,7 +3,8 @@ Type: Package
 Title: White's test and Bootstrapped White's test
 Version: 0.0.1
 Authors@R: c(
-    person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre"))
+    person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre")),
+    person("Jinook", "Jeong", ,"jinookjeong@gmail.com", c("ctb"))
     )
 Description: This package presents the White's Test of Heterocedasticity and a bootstrapped version of it, developed under the methodology of Jeong, J., Lee, K. (1999).
 License: MIT + file LICENSE
