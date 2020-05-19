@@ -1,6 +1,6 @@
 Package: whitestrap
 Type: Package
-Title: White's test and Bootstrapped White's test
+Title: White's Test and Bootstrapped White's Test
 Version: 0.0.1
 Authors@R: c(
     person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre")),
