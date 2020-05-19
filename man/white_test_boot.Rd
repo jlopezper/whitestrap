@@ -27,7 +27,7 @@ This is a versioned White's test based on a bootstrap procedure that can improve
 specially in small samples. It was proposed by Jeong, J., Lee, K. (1999) (see references for further details).
 }
 \details{
-The boostrapped error term is defined by:
+The bootsrapped error term is defined by:
 
 \deqn{\widehat{u_i} = \sigma^2 * t_i^{*} (i = 1,...N)}
 

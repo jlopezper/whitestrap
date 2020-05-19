@@ -108,7 +108,7 @@ white_test <- function(model) {
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,
 #'
-#' @details The boostrapped error term is defined by:
+#' @details The bootsrapped error term is defined by:
 #'
 #' \deqn{\widehat{u_i} = \sigma^2 * t_i^{*} (i = 1,...N)}
 #'
@@ -207,7 +207,7 @@ print.white_test <- function(x, ...) {
         paste0("Null hypothesis: Homoskedasticity of the residuals"),
         paste0("Alternative hypothesis: Heteroskedasticity of the residuals"),
         paste0("Number of bootstrap samples: ", x$iters),
-        paste0("Boostrapped Test Statistic: ", x$w_stat),
+        paste0("Bootsrapped Test Statistic: ", x$w_stat),
         paste0("P-value: ", round(x$p_value, 6)),
         sep = "\n")
   }
