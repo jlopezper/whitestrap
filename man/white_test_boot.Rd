@@ -27,15 +27,13 @@ This is a versioned White's test based on a bootstrap procedure that can improve
 specially in small samples. It was proposed by Jeong, J., Lee, K. (1999) (see references for further details).
 }
 \details{
-The bootsrapped error term is defined by:
+The bootstrapped error term is defined by:
 
 \deqn{\widehat{u_i} = \sigma^2 * t_i^{*} (i = 1,...N)}
 
 where \eqn{t_i^{*}} follows a distribution satisfying \eqn{E(t) = 0} and \eqn{var(t) = I}.
 
-In particular, the selected distribution is (Handbook of Computational Econometrics (2009), p. 196):
-
-\deqn{t^{*} = \left\{\begin{matrix}-(\sqrt5-1)/2 & with & probability = (\sqrt5 + 1)/2\sqrt(5)\\ \sqrt5+1)/2 & with & probability = (\sqrt5 - 1)/2\sqrt(5)\end{matrix}\right.}
+In particular, the selected distribution of \eqn{t} can be found at the bottom of page 196 at Handbook of Computational Econometrics (2009).
 }
 \examples{
 \dontrun{
