@@ -32,6 +32,9 @@ This is an example which shows you how you can use the `white_test` and
 
 ``` r
 library(whitestrap)
+#> 
+#> Please cite as:
+#> Lopez, J. (2020), White's test and Bootstrapped White's test under the methodology of Jeong, J., Lee, K. (1999) package version 0.0.1
 
 set.seed(123)
 # Let's simulate some heteroscedastic data
@@ -61,7 +64,7 @@ white_test_boot(fit)
 #> Alternative hypothesis: Heteroskedasticity of the residuals
 #> Number of bootstrap samples: 1000
 #> Boostrapped Test Statistic: 12.88
-#> P-value: 0.009
+#> P-value: 0.003
 ```
 
 In either case, the returned object is a list with the value of the

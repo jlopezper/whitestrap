@@ -106,7 +106,7 @@ ggplot(simulation_data, aes(x=values, fill=ptypes)) +
         axis.line = element_line(colour = "black"))
 ```
 
-If we look at the cumulative distribution functions of both p-value distributions, we see that in small samples the bootstrapped test returns smaller p-values with higher probability.
+If we look at the cumulative distribution functions of both p-value distributions, we see that in small samples the bootstrapped test returns smaller p-values with higher probability. 
 
 ```{r echo=FALSE}
 # create ECDF of data
