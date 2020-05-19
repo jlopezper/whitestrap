@@ -1,6 +1,6 @@
 Package: whitestrap
 Type: Package
-Title: White Test and Bootstrapped White Test For Heteroskedasticity
+Title: White Test and Bootstrapped White Test for Heteroskedasticity
 Version: 0.0.1
 Authors@R: c(
     person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre")),
