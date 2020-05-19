@@ -89,7 +89,7 @@ white_test <- function(model) {
 #' @param bootstraps Number of bootstrap to be performed. If `bootstraps` is less than 10, it will automatically be set to 10.
 #' At least 500 simulations are recommended. Default value is set to 1000.
 #'
-#' @return AA list with class \code{white_test} containing:\tabular{ll}{
+#' @return A list with class \code{white_test} containing:\tabular{ll}{
 #'    \code{w_stat} \tab The value of the test statistic \cr
 #'    \tab \cr
 #'    \code{p_value} \tab The p-value of the test \cr
@@ -107,6 +107,16 @@ white_test <- function(model) {
 #'
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,
+#'
+#' @details The boostrapped error term is defined by:
+#'
+#' \deqn{\widehat{u_i} = \sigma^2 * t_i^{*} (i = 1,...N)}
+#'
+#' where \eqn{t_i^{*}} follows a distribution satisfying \eqn{E(t) = 0} and \eqn{var(t) = I}.
+#'
+#' In particular, the selected distribution is (Handbook of Computational Econometrics (2009), p. 196):
+#'
+#' \deqn{t^{*} = \left\{\begin{matrix}-(\sqrt5-1)/2 & with & probability = (\sqrt5 + 1)/2\sqrt(5)\\ \sqrt5+1)/2 & with & probability = (\sqrt5 - 1)/2\sqrt(5)\end{matrix}\right.}
 #'
 #' @examples
 #' \dontrun{
