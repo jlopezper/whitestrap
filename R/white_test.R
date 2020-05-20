@@ -30,7 +30,7 @@
 #'
 #' @references
 #' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
-#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. doi:10.2307/1912934
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. \doi{10.2307/1912934}
 #'
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,
@@ -103,7 +103,7 @@ white_test <- function(model) {
 #' Jeong, J., & Lee, K. (1999). Bootstrapped White’s test for heteroskedasticity in regression models. Economics Letters, 63(3), 261-267.
 #'
 #' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
-#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. doi:10.2307/1912934
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. \doi{10.2307/1912934}
 #'
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,

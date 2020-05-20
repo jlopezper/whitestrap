@@ -6,7 +6,7 @@ Authors@R: c(
     person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre")),
     person("Jinook", "Jeong", ,"jinookjeong@gmail.com", c("ctb"))
     )
-Description: This package presents the White's test of heteroskedasticity and a bootstrapped version of it, developed under the methodology of Jeong, J., Lee, K. (1999).
+Description: White test of heteroskedasticity and a bootstrapped version of it, developed under the methodology of Jeong, J., Lee, K. (1999).
 License: MIT + file LICENSE
 BugReports: https://github.com/jlopezper/whitestrap/issues
 Encoding: UTF-8
