@@ -30,7 +30,7 @@
 #'
 #' @references
 #' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
-#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. \doi{10.2307/1912934}
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838.
 #'
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,
@@ -38,9 +38,8 @@
 #' @seealso \code{\link[stats]{lm}}
 #'
 #' @examples
-#' \dontrun{
 #' # Define a dataframe with heteroscedasticity
-#' n <- 1000
+#' n <- 100
 #' y <- 1:n
 #' sd <- runif(n, min = 0, max = 4)
 #' error <- rnorm(n, 0, sd*y)
@@ -50,7 +49,6 @@
 #' fit <- lm(y ~ X, data = df)
 #' # White's test
 #' white_test(fit)
-#' }
 #' @importFrom graphics hist lines
 #' @import stats
 white_test <- function(model) {
@@ -103,7 +101,7 @@ white_test <- function(model) {
 #' Jeong, J., & Lee, K. (1999). Bootstrapped White’s test for heteroskedasticity in regression models. Economics Letters, 63(3), 261-267.
 #'
 #' White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
-#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. \doi{10.2307/1912934}
+#' and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838.
 #'
 #' Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 #' South-Western Cengage Learning,
@@ -117,9 +115,8 @@ white_test <- function(model) {
 #' In particular, the selected distribution of \eqn{t} can be found at the bottom of page 196 at Handbook of Computational Econometrics (2009).
 #'
 #' @examples
-#' \dontrun{
 #' # Define a dataframe with heteroscedasticity
-#' n <- 1000
+#' n <- 100
 #' y <- 1:n
 #' sd <- runif(n, min = 0, max = 4)
 #' error <- rnorm(n, 0, sd*y)
@@ -129,7 +126,7 @@ white_test <- function(model) {
 #' fit <- lm(y ~ X, data = df)
 #' # White's test
 #' white_test_boot(fit)
-#' }
+#'
 white_test_boot <-
   function(model, bootstraps = 1000) {
     if (bootstraps < 10) {

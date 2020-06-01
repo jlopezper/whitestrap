@@ -3,10 +3,10 @@ Type: Package
 Title: White Test and Bootstrapped White Test for Heteroskedasticity
 Version: 0.0.1
 Authors@R: c(
-    person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre")),
+    person("Jorge", "Lopez Perez", ,"jorge@loperez.com", c("aut", "cre", "cph")),
     person("Jinook", "Jeong", ,"jinookjeong@gmail.com", c("ctb"))
     )
-Description: White test of heteroskedasticity and a bootstrapped version of it, developed under the methodology of Jeong, J., Lee, K. (1999).
+Description: Formal implementation of White test of heteroskedasticity and a bootstrapped version of it, developed under the methodology of Jeong, J., Lee, K. (1999) <https://yonsei.pure.elsevier.com/en/publications/bootstrapped-whites-test-for-heteroskedasticity-in-regression-mod>.
 License: MIT + file LICENSE
 BugReports: https://github.com/jlopezper/whitestrap/issues
 Encoding: UTF-8

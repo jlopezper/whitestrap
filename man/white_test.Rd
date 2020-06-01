@@ -37,9 +37,8 @@ is defined as:
 where \eqn{R^2} is the R-squared value from the regression of \eqn{u^2}.
 }
 \examples{
-\dontrun{
 # Define a dataframe with heteroscedasticity
-n <- 1000
+n <- 100
 y <- 1:n
 sd <- runif(n, min = 0, max = 4)
 error <- rnorm(n, 0, sd*y)
@@ -50,10 +49,9 @@ fit <- lm(y ~ X, data = df)
 # White's test
 white_test(fit)
 }
-}
 \references{
 White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix Estimator
-and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838. \doi{10.2307/1912934}
+and a Direct Test for Heteroskedasticity. Econometrica, 48(4), 817-838.
 
 Wooldridge, Jeffrey M., 1960-. (2012). Introductory econometrics : a modern approach. Mason, Ohio :
 South-Western Cengage Learning,
